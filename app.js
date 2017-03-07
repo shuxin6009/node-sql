@@ -4,24 +4,16 @@
  * 启动项目后台服务  支付
  */
 var express = require("express");
+var mysql = require("mysql");
+//引入数据库操作
+//var db  = require("./db.js");
+
 var app = express();
-var jade = require("jade");
-var path = require("path");
-//var gamePay = require("modules/pay/gamePay.js");//引用js文件
+
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-
-app.set('view engine', 'jade');//设置默认的模板引擎
-app.set('views',path.join(__dirname,'view'));//3 设置视图的对应目录  view先被渲染
-app.use(express.static(path.join(__dirname,'static/images')));//图片
-app.use(express.static(path.join(__dirname,'static/css')));
-app.use(express.static(path.join(__dirname,'static/js')));
-app.engine('jade', jade.__express);
-
-//res.render('视图的路径', { 返回的数据名称：返回的数据内容}); //4 向特定路径的视图返回数据
-// respond with "hello world" when a GET request is made to the homepage
 
 app.get('/index', function(req, res) {//首页
     console.info("index我收到了一个消息...");
@@ -29,47 +21,122 @@ app.get('/index', function(req, res) {//首页
     res.render('index.jade');  //http://localhost:8081/index
 });
 
-/*
-* totalRandomNum  获取总数，刷新页面随机递增
-* */
-var totalRandomNum = 0;
-app.get('/getRandomNum', function(req, res) {//点击微信支付，提交表单
-    //gamePay.getRandomNum(req,res);//调用js文件的函数
-    console.info("getRandomNum收到消息了");
-    totalRandomNum = totalRandomNum + Math.round(Math.random() * 3) ;//随机增加0-3
-    res.locals.totalRandomNum = totalRandomNum;
-    res.send({result:totalRandomNum});  //
-});
-var gift;
-app.post('/pay', function(req, res) {//点击微信支付，提交表单
-   // gamePay.toGamePayPage(req,res);//调用js文件的函数
 
-    console.info("pay收到消息了"+req.body);
-    var gameDist = req.body.gameDist;
-    var serverId = req.body.serverId;
-     gift = req.body.gift;
-    var roleName = req.body.roleName;
-    res.locals.gameDist=gameDist;
-    res.locals.serverId=serverId;
-    res.locals.gift=gift;
-    res.locals.roleName=roleName;
-    res.render('pay.jade',{'gift':gift});
-});
+/**
+ * 添加
+ */
+app.get('/add', function(req, res) {//点击微信支付，提交表单
+    var uname = req.query.uname;
+    var pwd = req.query.pwd;
+    console.info("传入参数: uname:"+uname+" pwd:"+pwd);
 
-app.post('/weixinPay', function(req, res) {//点击确认微信支付
-   // gamePay.pays(req,res);//调用js文件的函数
-    console.info("weixinpay收到消息...");
-    var phone = req.body.phone;
-    console.info('phone---'+phone);
-    res.locals.phone = phone;
-    res.locals.gift = gift;
-    if (phone == '1') {
-        console.log(111);
-        res.render('weixinPayForPhone.jade',{'phone':phone,'gift':gift});
-    } else {
-        console.log('000');
-        res.render('weixinPay.jade',{'phone':phone,'gift':gift});
+    if(uname==undefined||pwd==undefined){
+        res.end("用户名或者密码不能为空");
+        return;
     }
+
+    //add2Mysql
+    var client = getConnection();
+    try{
+        //执行连接
+        client.connect();
+        var usr={name:uname,pwd:pwd,email:'zhangsan@gmail.com'};
+        client.query('insert into user set ?', usr, function(err, result) {
+            if (err) throw err;
+            console.log(result);
+            console.log('\n');
+        });
+        //关闭数据库
+        client.end();
+
+    }catch (e){
+        console.log(e);
+        res.end("注册失败");
+        return;
+    }
+
+    res.end("注册成功");
+});
+
+//查询
+app.get('/login.html', function(req, res) {//首页
+
+    var uname = req.query.uname;
+    var pwd = req.query.pwd;
+
+    console.info("传入参数: uname:"+uname+" pwd:"+pwd);
+
+    var usr={name:uname};
+    //add2Mysql
+    var client = getConnection();
+    //执行连接
+    client.connect();
+    client.query('select * from user where ?', usr,function(err, rows) {
+        if (err) throw err;
+        console.log('selected after deleted');
+        if(rows.length<1){
+            res.end("用户名不存在。。");
+            return;
+        }
+        var dbUserPwd = rows[0].pwd;
+        if(pwd===dbUserPwd){
+            res.end("恭喜您，登录成功..");
+            return;
+        }
+        res.end("用户名或者密码错误");
+        console.log('\n');
+    });
+    //关闭数据库
+    client.end();
+
+});
+
+app.get('/update', function(req, res) {//首页
+
+    var uname = req.query.uname;
+    var pwd = req.query.pwd;
+
+    console.info("传入参数: uname:"+uname+" pwd:"+pwd);
+
+    //add2Mysql
+    var client = getConnection();
+    var sql = "update user set pwd='"+pwd+"' where name='"+uname+"'";
+    //执行连接
+    client.connect();
+    client.query(sql,function(err, rows) {
+        if (err) throw err;
+        res.end("修改密码成功");
+        return ;
+    });
+    //关闭数据库
+    client.end();
+});
+
+//删除
+app.get('/del', function(req, res) {//首页
+
+    var uname = req.query.uname;
+    var pwd = req.query.pwd;
+
+    console.info("传入参数: uname:"+uname+" pwd:"+pwd);
+
+    //add2Mysql
+    var client = getConnection();
+    var sql = "delete from user where ? ";
+    var usr = {name:uname};
+    //执行连接
+    client.connect();
+    client.query(sql,usr,function(err, rows) {
+        if (err){
+            res.end(JSON.stringify(err));
+            throw err;
+            return;
+        }
+        res.end("删除用户成功...");
+        return ;
+    });
+    //关闭数据库
+    client.end();
 });
 
 var server = app.listen(8081, function () {
@@ -77,3 +144,14 @@ var server = app.listen(8081, function () {
     var port = server.address().port;
     console.log("服务器已开启，访问地址为 http://%s:%s", host, port)
 });
+
+function getConnection(){
+    //add2Mysql
+    return mysql.createConnection({
+        host     : '123.56.146.64',
+        user     : 'work',
+        password : 'xyMysql2016',
+        database : 'lanlan',
+        port:'3306'
+    });
+}
