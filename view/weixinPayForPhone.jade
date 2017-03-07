@@ -1,0 +1,23 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(http-equiv='pragma', content='no-cache')
+    meta(http-equiv='Cache-Control', content='no-cache, must-revalidate')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(http-equiv='expires', content='0')
+    title 收银台
+    link(rel='stylesheet', href='phone.css')
+  body
+    .scan
+      h6 扫一扫二维码即可完成支付
+      .qrcode
+        .code-img
+          img#wechat-img-buffer(src='')
+          p 微信扫码支付
+    script(type='text/javascript', src='getRandomNumAndUser.js')
+    script(type='text/javascript').
+        window.onload = function () {
+            toPay(#{gift});
+        }

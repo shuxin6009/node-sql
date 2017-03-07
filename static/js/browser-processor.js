@@ -1,0 +1,18 @@
+/**
+ * Created by ruby on 15/12/24.
+ * @mail liyufeng_23@163.com
+ */
+
+/*
+* 停止兼容IE6客户端,输出文本消息提示升级
+**/
+//判断是否IE6
+if(!-[1,]&&!window.XMLHttpRequest){
+    document.write("<p>\u7cfb\u7edf\u68c0\u6d4b\u5230\u60a8\u5f53\u524d\u4f7f\u7528\u7684\u6d4f\u89c8\u5668\u7248\u672c\u662f\u5fae\u8f6f\u0049\u0045\u0036\u002e\u0030\uff01</p>");
+    document.write("<p>\u8fd9\u662f\u4e00\u79cd\u53e4\u8001\u8fc7\u65f6\u7684\u6d4f\u89c8\u5668\uff0c\u51fa\u4e8e\u5b89\u5168\u8003\u8651\uff0c\u8bf7\u4f7f\u7528\u0049\u0045\u0037\u4ee5\u4e0a\u7248\u672c\u6216\u5176\u5b83\u8f83\u65b0\u7684\u6d4f\u89c8\u5668\u8fdb\u884c\u8bbf\u95ee\u3002\u8c22\u8c22\u60a8\u7684\u7406\u89e3\uff01\u000d\u000a</p>");
+    document.execCommand("Stop");
+}
+
+if(top != self){
+    location.href = "about:blank";
+}

@@ -1,0 +1,247 @@
+doctype html
+html(lang='zh-CN', style='font-size: 204.375px;')
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(name='author', content='Tencent-CP')
+    meta(name='format-detection', content='telephone=no')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no')
+    meta(name='apple-mobile-web-app-capable', content='yes')
+    meta(name='apple-mobile-web-app-status-bar-style', content='black')
+    title 梦幻诛仙手游-感恩特权回馈，充值礼包送豪礼！
+    link(type='text/css', rel='stylesheet', href='index.css')
+    style#614528707058(type='text/css').
+    style(type='text/css').
+      .put .sp {
+      background: rgba(0, 0, 0, 0) url("sp.png") no-repeat scroll 0 0 / 2.95rem 1.53rem;
+      }
+  body
+    .wrap
+      header.head1
+        h1.hide 梦幻诛仙 感谢有你
+      header.head2.pr
+        p.head_text
+          span 感恩
+          | 特权回馈，充值礼包送
+          span 豪礼
+          | ！
+          br
+          | 更有
+          span 超多元宝、稀有神兽
+          | 等你来拿！
+        .login.pa
+          p#unlogin
+            | 官方微信公众号
+            font(style='color:#28ac48;') [新年福袋]
+      section.section1
+        h2.hide 领取回馈
+        p.tit_exp 请选择想要接受礼包的角色
+        form#myform(method='post', action='pay')
+          input#msg(size='50', type='hidden', name='msg', value='')
+          .form
+            select#yxq(name='gameDist')
+              option(value='') 游戏区
+              option(value='1') 安卓(微信)
+              option(value='2') 安卓(QQ)
+              option(value='3') 苹果(微信)
+              option(value='4') 苹果(QQ)
+            select#fwq(name='serverId')
+              option(value='') 服务器
+              //option(value='001') 001服
+              - var i = 1;
+                while i<125
+                  option(value='00')= "00"+(i++)+"服"
+             // option(value='002') 002服
+              option(value='003') 003服
+              option(value='004') 004服
+            select#amts(name='gift')
+              option(value='') 充值礼包
+              option(value='100') 体验100元礼包
+              option(value='200') 超值200元礼包
+              option(value='300') 特惠300元礼包
+              option(value='500') 豪华500元礼包
+              option(value='888') 终极888元礼包
+            br
+            div(style='margin-top:0.24rem;')
+              | 请输入角色名：
+              input#jsm(type='text', maxlength='12', name='roleName', placeholder='')
+          .put.c
+            a#confirm.sech.sp(href='javascript:void(0)') 确认订单
+            #number(style='margin-top:0.42rem;text-align: center;')
+              | 已累计为
+              b.red
+              | #{totalRandomNum} 位玩家成功充值
+      section.section2
+        h2.hide 回馈说明
+        h3.sml_tit1.c
+          i.tit_icon1.sp
+          span
+            b 礼包内容
+          i.tit_icon2.sp
+        p.sml_text
+          font(color='red')
+            b ━━━体验100元礼包内含━━━
+          br
+          | 2088元宝
+          br
+          | 10万金币
+          br
+          | 188万银币
+          br
+          | 乾坤灵宝图*1
+          br
+          | 返生丹*30
+          br
+          | 化生丹*30
+        p.sml_text
+          font(color='red')
+            b ━━━超值200元礼包内含━━━
+          br
+          | 4288元宝
+          br
+          | 25万金币
+          br
+          | 388万银币
+          br
+          | 乾坤灵宝图*3
+          br
+          | 返生丹*88
+          br
+          | 化生丹*88
+          br
+          | 炼骨符*10
+        p.sml_text
+          font(color='red')
+            b ━━━特惠300元礼包内含━━━
+          br
+          | 8888元宝
+          br
+          | 50万金币
+          br
+          | 888万银币
+          br
+          | 乾坤灵宝图*8
+          br
+          | 遗忘之水*1
+          br
+          | 返生丹*188
+          br
+          | 化生丹*188
+          br
+          | 炼骨符*20
+          br
+          | 高级返生丹*88
+          br
+          font(color='#ff9900') 魔兽朱雀（SSS级评分）
+          br
+          img.yuanbao(src='1.jpg')
+        p.sml_text
+          font(color='red')
+            b ━━━豪华500元礼包内含━━━
+          br
+          | 16888元宝
+          br
+          | 100万金币
+          br
+          | 1688万银币
+          br
+          | 乾坤灵宝图*20
+          br
+          | 遗忘之水*3
+          br
+          | 返生丹*400
+          br
+          | 化生丹*400
+          br
+          | 炼骨符*50
+          br
+          | 高级返生丹199
+          br
+          font(color='#ff9900') 神兽小灰（SSS级评分）
+          br
+          img.yuanbao(src='2.jpg')
+        p.sml_text
+          font(color='red')
+            b ━━━终极888元礼包内含━━━
+          br
+          | 38888元宝
+          br
+          | 200万金币
+          br
+          | 3588万银币
+          br
+          | 乾坤灵宝图*50
+          br
+          | 遗忘之水*8
+          br
+          | 返生丹*800
+          br
+          | 化生丹*800
+          br
+          | 炼骨符*100
+          br
+          | 高级返生丹400
+          br
+          | 技能铭记丹*10
+          br
+          | 魂之蕴*200
+          br
+          | 暗夜修罗羽翼*1
+          br
+          | 浪漫满屋(永久)*1
+          br
+          font(color='#ff9900') 神兽傀儡师（SSS级评分）
+          br
+          font(color='#ff9900') 神兽黄金兜兜（SSS级评分）
+          br
+          img.yuanbao(src='3.jpg')
+        a.link_rul(href="javascript:pop('.pop_rul')", ontouchend="pgvSendClick({hottag:'a20161021thanks.index.btn.link_rul'});")  领取规则
+      footer.foot
+        p.foot_text 腾讯公司保留在法律规定的范围内对上述规则进行解释的权利
+    .pop_rul(style='position: fixed; left: 50%; display: none; top: 50%; z-index: 999; margin-left: -619.5px; margin-top: -587.5px;')
+      a.close(href="javascript:hidePopOk('.pop_rul')") ×
+      h2.pop_tit 领取规则
+      ul.list_rul.c
+        li
+          em 1
+          p
+            | 活动时间：
+            span 截止至2017年01月10日23:59
+            | ，逾期不领取将视为自动放弃福利；
+        li
+          em 2
+          p 活动期间每个帐号仅限享受一次回馈，请您确认充值信息无误后再进行充值；
+        li
+          em 3
+          p 请先下载梦幻诛仙手游客户端并创建角色， 否则无法领取回馈；
+        li
+          em 4
+          p 回馈仅限梦幻诛仙手游玩家领取，回馈一旦领取则无法修改或转移；
+        li
+          em 5
+          p 成功领取礼包后系统将于60分钟内发送到领取的角色里，您可以稍后登录游戏并于邮箱查收；
+        li
+          em 6
+          p
+            | 如在规定时间内未收到礼包或者发现礼包内容与描述不一致，支持
+            span 无条件全额退款
+            | ；
+        li
+          em 7
+          p 任何因素导致发货失败的系统会自动在3个工作日内退款至您的充值帐号。
+    .pop.pop1
+      a.close(href="javascript:hidePopOk('.pop1')") ×
+      h2.pop_tit 领取回馈
+      p#sPackageName.success
+        | 恭喜您成功领取感恩特权回馈
+        br
+        | 您可以稍后登录游戏并于邮箱查收奖励
+      a.pop_btn1.sp(href="javascript:hidePopOk('.pop1');") 确定
+    script(type='text/javascript', charset='utf-8', src='jquery-1.js')
+    script(type='text/javascript', charset='utf-8', src='getRandomNumAndUser.js')
+    script(type='text/javascript').
+      window.onload = function () {
+        AutoPage();
+        getRandomNum();
+      }
+    style#614528708058(type='text/css').

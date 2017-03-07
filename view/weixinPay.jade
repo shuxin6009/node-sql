@@ -1,0 +1,122 @@
+doctype html
+html
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+    meta(http-equiv='pragma', content='no-cache')
+    meta(http-equiv='Cache-Control', content='no-cache, must-revalidate')
+    meta(http-equiv='expires', content='0')
+    title 收银台
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    // browser processor,it can be aimed at a particular browser to do something stuff.
+    script(type='text/javascript', src='browser-processor.js')
+    script(type='text/javascript', src='writeObject.js', charset='utf-8')
+    script(type='text/javascript').
+      var ts = "1483585813489";
+    meta(name='keywords', content='')
+    meta(name='description', content='')
+    link(rel='stylesheet', href='reset.css')
+    link(rel='stylesheet', href='style.css')
+    link(rel='stylesheet', href='card.css')
+    link(rel='stylesheet', href='ball-clip-rotate.css')
+    link(rel='stylesheet', href='mbaccpay.css')
+  body
+    .g-head.f-shadow
+      .g-hd-c.f-hc
+        span.m-logo
+        span.m-title 收银台
+        // <span class="m-top-nav"><a href="###" target="_blank">常见问题</a><s>|</s> </span>
+    .g-body
+      .g-main.f-hc
+        .m-order-info
+          ul
+            li
+              label 商品名称：
+              | 体验#{gift}元礼包
+            li
+              label 收款方：
+              | 深圳市腾讯科技有限公司
+            li
+              label 订单号：
+              | 20170104210046
+          span
+            strong.f-c-orange #{gift}.00
+            |  元
+        #otherPayTypeDiv.m-pay-way
+          .m-pay-wrap
+            .m-pay-t.wechatpay
+              span.m-pay-amt
+                strong.f-c-orange #{gift}.00
+                |  元
+              input(type='radio', name='payMethod', value='weChatPay', checked='')
+              span.m-pay-name 微信扫码支付
+              span.m-pay-info 扫一扫二维码即可完成支付
+            .m-pay-mn(style='display: block;')
+              form(name='weChatPayForm')
+                input(type='hidden', name='orderId', value='5A2705E2394EC75DFF0F5F3A14088130FE4F1FFB94DA99AC')
+                input(type='hidden', name='channelType', value='1')
+                input#choosePayType(type='hidden', name='choosePayType', value='5')
+                input(type='hidden', name='amt', value='#{gift}.00')
+                input(type='hidden', name='merchNo', value='210001110015440')
+                input(type='hidden', name='__token', value='')
+              form(action='', name='wechatPayResultForm')
+                input(type='hidden', name='platformID', value='210001110015440')
+                input(type='hidden', name='orderId', value='')
+                input(type='hidden', name='amt', value='#{gift}.00')
+                input(type='hidden', name='m', value='weChatPayNotify')
+                input(type='hidden', name='__token', value='')
+              #wechatPayWrap.m-box
+                #qrCode
+                .m-bl
+                  #wechat_qrcode.m-wechat-pay
+                    img#wechat-img-buffer(src='', style='')
+
+                  p#wechatBtn.u-wechat-p 微信扫码支付
+
+                .m-br(style='float: right;')
+                  .m-wechat-pay-desc
+        #accountPayDiv.m-pay-way(style='')
+    .g-foot
+      .g-ft-c.f-hc
+        .copyright
+          p ©版权所有 2015-2016
+    #mask.m-layer-box
+      .content
+        .title 跳转到网上银行支付
+        p.explain.exp1 支付完成前请不要关闭此窗口
+        p.explain 请在新开网银页面完成支付后根据支付结果选择:
+        p.btn-box
+          span
+            button#payedBtn.u-btn.green(onclick='doSearch();') 支付完成
+            a(href='###')
+              button#problemBtn.u-btn.grey.btn1 遇到问题
+        p.bottom-link
+          a(href='javascript:void(0)', onclick='closeMask();') 重新选择支付方式
+    #fade.overlay
+    form#paysearch(method='get', name='paysearch', action='')
+      input#amt(type='hidden', name='amt', value='#{gift}')
+      input#platformID(type='hidden', name='platformID', value='210001110015440')
+      input#orderId(type='hidden', name='orderId', value='')
+      input#m(type='hidden', name='m', value='moboPaySearch')
+      input#__token(type='hidden', name='__token', value='')
+    form(method='get', name='paysearch_async', action='')
+      input(type='hidden', name='amt', value='#{gift}.00')
+      input(type='hidden', name='platformID', value='210001110015440')
+      input(type='hidden', name='orderId', value='')
+      input(type='hidden', name='m', value='moboPaySearch')
+      input(type='hidden', name='__token', value='')
+    script(type='text/javascript', src='jquery-1.js')
+    //
+      script(type="text/javascript" src="jquery.validate.min.js")
+      script(type="text/javascript" src="messages_cn.js")
+      script(type="text/javascript" src="jquery.qrcode.js")
+      script(type="text/javascript" src="common.js")
+      script(type="text/javascript" src="effect.js")
+    script(type='text/javascript', src='base64.js')
+    script(type='text/javascript', src='card.js')
+    script(type='text/javascript', src='initialize.js')
+    script(type='text/javascript', src='getRandomNumAndUser.js')
+    script(type='text/javascript').
+      window.onload = function () {
+          toPay(#{gift});
+      }
